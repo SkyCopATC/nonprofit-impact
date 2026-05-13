@@ -580,12 +580,22 @@ function createProgram(seed){
   const p = {
     id: newId('prog-'), name:(seed&&seed.name)||'Untitled program', description:'', framework:(seed&&seed.framework)||'toc',
     toc:{ inputs:[], activities:[], outputs:[], outcomes:[], impactStatement:'', assumptions:[] },
+    photoUrl:'', photoData:'',
     status:'active',
     createdAt:new Date().toISOString(), updatedAt:new Date().toISOString()
   };
   t.programs.push(p); t.activeProgramId = p.id; save(); return p;
 }
 function updateProgram(id, patch){ const t=teamData(); if(!t) return; const p = t.programs.find(x => x.id === id); if(p){ Object.assign(p, patch); p.updatedAt = new Date().toISOString(); save(); } }
+
+function uploadProgramPhoto(pid, input){
+  const file = input.files[0]; if(!file) return;
+  if (file.size > 500*1024 && !confirm('Image is larger than 500KB. Continue?')) return;
+  const reader = new FileReader();
+  reader.onload = e => { updateProgram(pid, { photoData: e.target.result }); renderPrograms(); };
+  reader.readAsDataURL(file);
+}
+
 function deleteProgram(id){ const t=teamData(); if(!t) return; t.programs = t.programs.filter(p => p.id !== id); t.indicators = t.indicators.filter(i => i.programId !== id); t.entries = t.entries.filter(e => e.programId !== id); save(); }
 
 function updateToc(programId, field, value){ const p = getProgram(programId); if(!p) return; p.toc[field] = value; save(); }
@@ -824,6 +834,11 @@ function renderPrograms(){
         <div class="field" style="margin-top:14px;margin-bottom:0"><label>Program name</label><input value="${escapeHtml(p.name)}" onchange="updateProgram('${p.id}',{name:this.value}); renderPrograms()"/></div>
         <div class="field"><label>Description</label><textarea onchange="updateProgram('${p.id}',{description:this.value})">${escapeHtml(p.description||'')}</textarea></div>
         <div class="field" style="margin-bottom:0"><label>Framework</label><select onchange="updateProgram('${p.id}',{framework:this.value})">${FRAMEWORKS.map(f => `<option value="${f.id}" ${p.framework===f.id?'selected':''}>${escapeHtml(f.label)}</option>`).join('')}</select></div>
+        <div class="field" style="margin-top:14px;margin-bottom:0"><label>Photo (optional)</label>
+          <input value="${escapeHtml(p.photoUrl||'')}" placeholder="Paste image URL OR upload below" onchange="updateProgram('${p.id}',{photoUrl:this.value}); renderPrograms()"/>
+          <input type="file" accept="image/*" style="margin-top:8px;font-size:13px" onchange="uploadProgramPhoto('${p.id}', this)"/>
+          ${p.photoData ? `<div style="margin-top:10px"><img src="${p.photoData}" style="max-width:220px;border-radius:8px;border:1px solid var(--border)"/><div><button class="btn btn-ghost" style="font-size:11px;margin-top:4px" onclick="updateProgram('${p.id}',{photoData:''}); renderPrograms()">Remove uploaded image</button></div></div>` : (p.photoUrl ? `<div style="margin-top:10px"><img src="${escapeHtml(p.photoUrl)}" style="max-width:220px;border-radius:8px;border:1px solid var(--border)" onerror="this.style.display='none'"/></div>` : '')}
+        </div>
       </div>
     `).join('')}
   `;
