@@ -615,9 +615,18 @@ function deletePrePost(id){ const t=teamData(); if(!t) return; t.preposts = t.pr
 function preposts(programId){ const t=teamData(); return t ? t.preposts.filter(p => !programId || p.programId === programId) : []; }
 
 // Stories
-function createStory(programId){ const t=teamData(); if(!t) return; t.stories.push({ id:newId('s-'), programId, title:'', body:'', participantName:'', photoUrl:'', date:new Date().toISOString().slice(0,10) }); save(); }
+function createStory(programId){ const t=teamData(); if(!t) return; t.stories.push({ id:newId('s-'), programId, title:'', body:'', participantName:'', photoUrl:'', photoData:'', date:new Date().toISOString().slice(0,10) }); save(); }
 function updateStory(id, patch){ const t=teamData(); if(!t) return; const s = t.stories.find(x => x.id === id); if(s){ Object.assign(s, patch); save(); } }
 function deleteStory(id){ const t=teamData(); if(!t) return; t.stories = t.stories.filter(s => s.id !== id); save(); }
+
+function uploadStoryPhoto(sid, input){
+  const file = input.files[0]; if(!file) return;
+  if (file.size > 500*1024 && !confirm('Image is larger than 500KB. Continue? (Large images may slow the app.)')) return;
+  const reader = new FileReader();
+  reader.onload = e => { updateStory(sid, { photoData: e.target.result }); renderStories(); };
+  reader.readAsDataURL(file);
+}
+
 function stories(programId){ const t=teamData(); return t ? t.stories.filter(s => !programId || s.programId === programId) : []; }
 
 // Funder reports
@@ -1001,7 +1010,11 @@ function renderStories(){
         <div class="field"><label>Story / case study</label><textarea style="min-height:160px" onchange="updateStory('${s.id}',{body:this.value})">${escapeHtml(s.body)}</textarea></div>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
           <div class="field"><label>Participant (with consent)</label><input value="${escapeHtml(s.participantName||'')}" onchange="updateStory('${s.id}',{participantName:this.value})"/></div>
-          <div class="field"><label>Photo URL (optional)</label><input value="${escapeHtml(s.photoUrl||'')}" onchange="updateStory('${s.id}',{photoUrl:this.value})"/></div>
+          <div class="field"><label>Photo (optional)</label>
+            <input value="${escapeHtml(s.photoUrl||'')}" placeholder="Paste image URL OR upload below" onchange="updateStory('${s.id}',{photoUrl:this.value})"/>
+            <input type="file" accept="image/*" style="margin-top:8px;font-size:13px" onchange="uploadStoryPhoto('${s.id}', this)"/>
+            ${s.photoData ? `<div style="margin-top:10px"><img src="${s.photoData}" style="max-width:200px;border-radius:8px;border:1px solid var(--border)"/><div><button class="btn btn-ghost" style="font-size:11px;margin-top:4px" onclick="updateStory('${s.id}',{photoData:''}); renderStories()">Remove uploaded image</button></div></div>` : (s.photoUrl ? `<div style="margin-top:10px"><img src="${escapeHtml(s.photoUrl)}" style="max-width:200px;border-radius:8px;border:1px solid var(--border)" onerror="this.style.display='none'"/></div>` : '')}
+          </div>
           <div class="field"><label>Date</label><input type="date" value="${escapeHtml(s.date||'')}" onchange="updateStory('${s.id}',{date:this.value})"/></div>
         </div>
         <div style="display:flex;justify-content:flex-end"><button class="btn btn-ghost" onclick="if(confirm('Delete story?')){deleteStory('${s.id}'); renderStories();}">🗑</button></div>
