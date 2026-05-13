@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nonprofit Impact &amp; Outcomes — User Guide</title>
+<style>
+  :root {
+    --navy:#1B3A5C;--teal:#0F766E;--gold:#D4A843;--light:#EFF4FA;--mid:#C8D8EA;
+    --dark:#1E293B;--muted:#64748B;--bg:#F8FAFC;--card:#FFFFFF;--radius:10px;
+    --green:#15803D;--green-bg:#DCFCE7;--blue:#2563EB;--blue-bg:#EFF6FF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--dark);line-height:1.7;font-size:15px}
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:265px;min-width:265px;background:var(--navy);color:#fff;position:sticky;top:0;height:100vh;overflow-y:auto;padding:0 0 32px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .sidebar-brand{padding:24px 20px 18px;border-bottom:1px solid rgba(255,255,255,.14);margin-bottom:10px}
+  .sidebar-brand .logo{font-size:18px;font-weight:800;color:var(--gold)}
+  .sidebar-brand .sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:4px;text-transform:uppercase;letter-spacing:.5px;line-height:1.4}
+  .toc-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.32);padding:10px 20px 4px}
+  .toc a{display:block;padding:7px 20px;color:rgba(255,255,255,.68);text-decoration:none;font-size:13px;border-left:3px solid transparent}
+  .toc a:hover,.toc a.active{color:#fff;background:rgba(255,255,255,.08);border-left-color:var(--gold)}
+  .toc-sep{border-top:1px solid rgba(255,255,255,.1);margin:10px 0}
+  .main{flex:1;min-width:0;padding:48px 56px;max-width:900px}
+  @media(max-width:820px){.sidebar{display:none}.main{padding:24px 18px}}
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,#1e4d8c 100%);border-radius:var(--radius);padding:40px 44px;color:#fff;margin-bottom:48px}
+  .hero-eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;font-weight:600}
+  .hero h1{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:10px}
+  .hero p{color:rgba(255,255,255,.78);font-size:15px;max-width:580px;line-height:1.65}
+  .hero-badges{display:flex;gap:.6rem;margin-top:18px;flex-wrap:wrap}
+  .hero-badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:600;color:#fff}
+  .section{margin-bottom:60px}
+  h2{font-size:22px;font-weight:700;color:var(--navy);padding-bottom:10px;border-bottom:2px solid var(--mid);margin-bottom:22px;scroll-margin-top:24px}
+  h3{font-size:16px;font-weight:700;color:var(--teal);margin:26px 0 10px}
+  p{margin-bottom:14px}
+  ul,ol{padding-left:22px;margin-bottom:14px}
+  li{margin-bottom:7px}
+  a{color:var(--blue)}
+  strong{color:var(--navy)}
+  .callout{border-left:4px solid var(--gold);background:var(--light);border-radius:0 var(--radius) var(--radius) 0;padding:14px 18px;margin:18px 0}
+  .callout.tip{border-left-color:var(--teal)}
+  .callout-head{font-weight:700;font-size:14px;color:var(--navy);margin-bottom:6px}
+  .callout p{margin-bottom:6px;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+  .tbl-wrap{overflow-x:auto;margin:16px 0 24px;border-radius:var(--radius);border:1px solid var(--mid)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-weight:600;font-size:13px}
+  td{padding:10px 14px;border-bottom:1px solid var(--mid);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tr:nth-child(even) td{background:var(--light)}
+</style></head>
+<body>
+<div class="layout">
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo">Build Your Club</div>
+    <div class="sub">Nonprofit Impact &amp; Outcomes<br>User Guide</div>
+  </div>
+  <div class="toc-label">Contents</div>
+  <div class="toc">
+    <a href="#about">1. About This Tool</a>
+    <a href="#outputs">2. Outputs vs Outcomes</a>
+    <a href="#start">3. Getting Started</a>
+    <a href="#programs">4. Programs &amp; Frameworks</a>
+    <a href="#toc">5. Theory of Change</a>
+    <a href="#indicators">6. Indicators</a>
+    <a href="#entries">7. Data Entries</a>
+    <a href="#prepost">8. Pre/Post Tracking</a>
+    <a href="#stories">9. Stories &amp; Cases</a>
+    <a href="#funder">10. Funder Reports</a>
+    <a href="#annual">11. Annual Impact Narrative</a>
+    <a href="#cross">12. Cross-App Integration</a>
+    <div class="toc-sep"></div>
+    <a href="#contact">Contact &amp; Support</a>
+  </div>
+</nav>
+
+<main class="main" id="top">
+  <div class="hero">
+    <div class="hero-eyebrow">Build Your Club · User Guide</div>
+    <h1>Nonprofit Impact &amp; Outcomes<br>User Guide</h1>
+    <p>Define metrics, log program data, and generate funder-ready impact reports. Theory of Change and Logic Model frameworks supported. Pre/post tracking for measuring real change in participants.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">Theory of Change</span>
+      <span class="hero-badge">Logic Model</span>
+      <span class="hero-badge">Outputs + Outcomes</span>
+      <span class="hero-badge">Pre/Post Tracking</span>
+      <span class="hero-badge">Funder + Annual Reports</span>
+    </div>
+  </div>
+
+  <div class="section" id="about">
+    <h2>1. About This Tool</h2>
+    <p>Funders increasingly want outcomes (changes in participants) — not just outputs (activity counts). A nonprofit that can articulate its theory of change, define indicators against that theory, log data over time, and produce a polished funder report wins more grants and retains more donors than one that can't.</p>
+    <p>This tool is the dedicated impact measurement workspace. It complements your Annual Report (which pulls program highlights from here) and your Grant Writing (which uses your theory of change in proposal narratives).</p>
+  </div>
+
+  <div class="section" id="outputs">
+    <h2>2. Outputs vs Outcomes — The Distinction That Matters</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>Outputs (Activity counts)</th><th>Outcomes (Changes in participants)</th></tr>
+      <tr><td>Number of meals served</td><td>% of participants reporting reduced food insecurity</td></tr>
+      <tr><td>Hours of coaching delivered</td><td>Average credit-score increase over 6 months</td></tr>
+      <tr><td>People enrolled in program</td><td>% who maintain employment 12 months post-graduation</td></tr>
+      <tr><td>Workshops conducted</td><td>Knowledge gain measured by pre/post assessment</td></tr>
+    </table></div>
+    <p>Outputs are easy to count. Outcomes are harder to measure but are what funders are increasingly asking about. This tool helps you track both — and produces reports that lead with outcomes.</p>
+    <div class="callout tip">
+      <div class="callout-head">A common trap</div>
+      <p>Don't replace outputs with outcomes — track both. Outputs prove you did the work. Outcomes prove the work changed something. Sophisticated funders want to see both numbers and the link between them.</p>
+    </div>
+  </div>
+
+  <div class="section" id="start">
+    <h2>3. Getting Started</h2>
+    <p>Demo: <strong>demo@example.org</strong> / <strong>demo</strong> — populated with a Financial Coaching Program example including ToC, 4 indicators, sample data, a story, and a pre/post participant record.</p>
+    <h3>Your first 30 minutes</h3>
+    <ol>
+      <li>Create your first <strong>Program</strong> — pick a real, current program with at least one defined outcome.</li>
+      <li>Build out the <strong>Theory of Change</strong> — what inputs and activities produce which outputs and outcomes? Don't overthink. Write rough drafts.</li>
+      <li>Define <strong>5–8 indicators</strong> — mix of outputs and outcomes. Set targets.</li>
+      <li>Backfill <strong>data entries</strong> for the last 2–3 reporting periods.</li>
+      <li>Add 2–3 <strong>stories</strong> capturing participant-level impact.</li>
+      <li>Create your first <strong>funder report</strong> — even if just for practice.</li>
+    </ol>
+  </div>
+
+  <div class="section" id="programs">
+    <h2>4. Programs &amp; Frameworks</h2>
+    <p>Each program has its own impact framework. Two options:</p>
+    <h3>Theory of Change (recommended for major programs)</h3>
+    <p>Full chain: inputs → activities → outputs → outcomes → long-term impact, plus underlying assumptions. More rigorous, but required by most major foundations.</p>
+    <h3>Logic Model (recommended for smaller programs)</h3>
+    <p>Simpler grid covering the same five categories. Faster to build. Good for board reporting and informal funder updates.</p>
+    <p>Pick per program — there's no need to commit your whole org to one or the other.</p>
+  </div>
+
+  <div class="section" id="toc">
+    <h2>5. Theory of Change Builder</h2>
+    <p>Five sections you fill out for each program:</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Section</th><th>Examples</th></tr>
+      <tr><td><strong>Inputs</strong></td><td>Staff (2 trained coaches), funding ($85K/year), partner referrals (5 agencies), curriculum materials</td></tr>
+      <tr><td><strong>Activities</strong></td><td>Recruit and intake 60 participants, deliver monthly 1:1 sessions, hold quarterly group workshops</td></tr>
+      <tr><td><strong>Outputs</strong></td><td>60 participants enrolled, 480+ coaching sessions, 12 workshops, 55 6-month assessments</td></tr>
+      <tr><td><strong>Outcomes</strong></td><td>80% increase credit score by 50+ points, 70% reduce debt by 20%+, 65% open emergency savings $500+</td></tr>
+      <tr><td><strong>Assumptions</strong></td><td>Participants stay engaged 6 months, coaching is effective when consistent, local employment available</td></tr>
+    </table></div>
+    <p>Plus a long-term <strong>Impact Statement</strong> — the systemic change your work contributes to.</p>
+  </div>
+
+  <div class="section" id="indicators">
+    <h2>6. Indicators</h2>
+    <p>An indicator is a specific, measurable thing you track over time. For each indicator, the tool captures:</p>
+    <ul>
+      <li><strong>Type</strong> — output or outcome</li>
+      <li><strong>Definition</strong> — exactly what counts (clearer = more credible)</li>
+      <li><strong>Unit</strong> — people, sessions, %, dollars, points, etc.</li>
+      <li><strong>Frequency</strong> — weekly, monthly, quarterly, annually</li>
+      <li><strong>Target</strong> — what you're aiming for</li>
+      <li><strong>Data source</strong> — where the number comes from (intake form, survey, soft credit pull)</li>
+    </ul>
+    <div class="callout">
+      <div class="callout-head">Indicator naming convention</div>
+      <p>Use plain English that any board member or funder can understand without context. "% of participants reporting increased confidence" beats "C-score Δ baseline-followup."</p>
+    </div>
+  </div>
+
+  <div class="section" id="entries">
+    <h2>7. Data Entries</h2>
+    <p>Each entry captures one indicator's value for one reporting period. The tool calculates running totals and progress toward target automatically.</p>
+    <p>Period format flexibility: use whatever your org uses — <code>2026-Q1</code>, <code>2026-03</code>, <code>Mar 2026</code>, <code>2026-W12</code>. The tool doesn't enforce a format because real nonprofits use all of them.</p>
+  </div>
+
+  <div class="section" id="prepost">
+    <h2>8. Pre/Post Tracking</h2>
+    <p>For outcomes that measure change in individual participants — income, credit score, knowledge test, self-reported confidence — the tool supports baseline-vs-follow-up records.</p>
+    <p>Each record captures:</p>
+    <ul>
+      <li>Participant reference (anonymized OK — "Participant #007")</li>
+      <li>Baseline date + measures (as key/value pairs)</li>
+      <li>Follow-up date + same measures</li>
+      <li>Automatic change summary showing delta for each measure</li>
+    </ul>
+    <div class="callout tip">
+      <div class="callout-head">Privacy</div>
+      <p>Don't enter PII in this section unless your data security model supports it. The tool's storage is browser-local — fine for aggregated data, NOT a HIPAA-compliant system. For named participant data, use anonymized references and store the cross-reference securely elsewhere.</p>
+    </div>
+  </div>
+
+  <div class="section" id="stories">
+    <h2>9. Stories &amp; Case Studies</h2>
+    <p>Funders read narrative stories with the same attention as quantitative outcomes — often more. A good story for the report typically has:</p>
+    <ul>
+      <li>One specific participant (with consent or anonymized)</li>
+      <li>A baseline situation</li>
+      <li>Concrete things that happened during the program</li>
+      <li>A specific outcome at the end (numbers help)</li>
+      <li>A direct quote where possible</li>
+    </ul>
+    <div class="callout">
+      <div class="callout-head">Consent</div>
+      <p>Always get explicit written consent before naming a participant in a public report. "Used with permission" is the standard tag. For minor participants, parental/guardian consent is required.</p>
+    </div>
+  </div>
+
+  <div class="section" id="funder">
+    <h2>10. Funder Reports</h2>
+    <p>For each grant or restricted gift, build a customized report:</p>
+    <ul>
+      <li>Pick which programs to include</li>
+      <li>Pick which indicators to feature</li>
+      <li>Write a narrative summary</li>
+      <li>Set the reporting period and due date</li>
+    </ul>
+    <p>The HTML preview and Word .docx output include the indicator table (target vs actual vs % of target), the theory of change context, and the top stories from each included program.</p>
+  </div>
+
+  <div class="section" id="annual">
+    <h2>11. Annual Impact Narrative</h2>
+    <p>The big-picture impact story for the year — the version you publish on your website, send to donors, and pull into your annual report. Captures:</p>
+    <ul>
+      <li>Year</li>
+      <li>Theme (the year's headline — "Pathways to Stability")</li>
+      <li>Narrative body</li>
+      <li>Program highlights to feature</li>
+    </ul>
+    <p>HTML preview and Word .docx output included. The Annual Report app can pull data from this narrative directly.</p>
+  </div>
+
+  <div class="section" id="cross">
+    <h2>12. Cross-App Integration</h2>
+    <div class="tbl-wrap"><table>
+      <tr><th>App</th><th>How it connects</th></tr>
+      <tr><td><a href="https://grants.buildyourclubacademy.org" target="_blank">Grant Writing</a></td><td>Your theory of change is the backbone of every proposal narrative. Copy from here.</td></tr>
+      <tr><td><a href="https://fundraising.buildyourclubacademy.org" target="_blank">Fundraising &amp; Development</a></td><td>Outcome data anchors donor stewardship and major-gift conversations.</td></tr>
+      <tr><td><a href="https://report.buildyourclubacademy.org" target="_blank">Annual Report</a></td><td>Annual Impact Narrative + program highlights feed directly into the Programs section of the annual report.</td></tr>
+      <tr><td><a href="https://donors.buildyourclubacademy.org" target="_blank">Donor CRM</a></td><td>Major donors increasingly ask for outcomes. Pull the right indicator results into stewardship letters.</td></tr>
+      <tr><td><a href="https://audit.buildyourclubacademy.org" target="_blank">Operations Audit</a></td><td>The Programs &amp; Impact domain in your annual audit references the data you keep here.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="section" id="contact">
+    <h2>Contact &amp; Support</h2>
+    <p>For questions or feedback: <a href="mailto:skycopatc@yahoo.com">skycopatc@yahoo.com</a>.</p>
+  </div>
+
+</main>
+</div>
+</body></html>
